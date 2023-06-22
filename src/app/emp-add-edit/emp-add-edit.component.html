@@ -1,0 +1,91 @@
+<div mat-dialog-title>
+    <h1>Alarm Form</h1>
+</div>
+<form [formGroup]="alarmForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Esclation Level</mat-label>
+                <mat-select formControlName="escalation_level">
+                    <mat-option *ngFor="let val of escalation_levels" [value]="val">{{val}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option *ngFor="let val of statuses" [value]="val">{{val}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Zone name</mat-label>
+                <input matInput type="text" placeholder="Zone Name" required="true" formControlName="zone_name">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Site</mat-label>
+                <mat-select formControlName="site_uuid" required="true">
+                    <mat-option *ngFor="let val of sites" [value]="val.uuid">{{val.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Zone</mat-label>
+                <mat-select formControlName="zone_uuid" required="true">
+                    <mat-option *ngFor="let val of zones" [value]="val.uuid">{{val.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-radio-group aria-label="Select an option" formControlName="active">
+                <mat-label><b>Active</b></mat-label>
+                <mat-radio-button *ngFor="let op of activeLists" 
+                [checked]="op.checked" name="opList" >{{ op.name}}</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Alarm alert link</mat-label>
+                <mat-select formControlName="alarm_alert_uuid">
+                    <mat-option *ngFor="let val of alarmAlertLinks" [value]="val.uuid">{{val.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Alarm Profile Type</mat-label>
+                <mat-select formControlName="alarm_profile_uuid">
+                    <mat-option *ngFor="let val of alarmProfiles" [value]="val.uuid">{{val.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Comments</mat-label>
+                <input matInput type="text" placeholder="Comments" formControlName="comment">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Approved By</mat-label>
+                <mat-select formControlName="approval_uuid">
+                    <mat-option *ngFor="let val of approvals" [value]="val.uuid">{{val.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Facility</mat-label>
+                <mat-select formControlName="facility_uuid">
+                    <mat-option *ngFor="let val of facilities" [value]="val.uuid">{{val.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
+    </div>
+</form>
